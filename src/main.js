@@ -1,22 +1,14 @@
-const myBoard = new Board(1);
+const myBoard = new Board(1, 5);
 
 const display = () => {
   for (const player of myBoard.players) {
     myBoard.ctx.fillStyle = 'black'
     myBoard.ctx.font = '13px sans-serif'
     if (player.id === 0) {
-      player.ctx.fillText(`Player one, score: ${player.score}`, 18, 25);
-      player.ctx.fillText(
-        `angle: ${player.angle}, speed: ${player.speed}`,
-        18,
-        40
-      );
+      player.ctx.fillText(`${player.name}, score: ${player.score}`, 18, 25);
+      player.ctx.fillText(`angle: ${player.angle}, speed: ${player.speed}`,18,40);
     } else {
-      player.ctx.fillText(
-        `Player two, score: ${player.score}`,
-        myBoard.canvas.width - 140,
-        25
-      );
+      player.ctx.fillText(`${player.name}, score: ${player.score}`,myBoard.canvas.width - 140,25);
       player.ctx.fillText(
         `angle: ${player.angle}, speed: ${player.speed}`,
         myBoard.canvas.width - 140,
@@ -43,12 +35,15 @@ const start = () => {
 
 const updateGame = () => {
   setWindow();
+  myBoard.frame++;
   
   if (!myBoard.roundOver) {
     if (!myBoard.banana) myBoard.newBanana()
     myBoard.banana.setBanana()
-    myBoard.banana.draw();
-    myBoard.banana.move();
+    if (myBoard.banana.speedX || myBoard.banana.speedY) {
+      myBoard.banana.draw();
+      myBoard.banana.move();
+    }
     for (const building of myBoard.myBuildings) {
       if (myBoard.banana.checkHit(building)) {
         myBoard.banana = null;
@@ -58,10 +53,13 @@ const updateGame = () => {
     for (const player of myBoard.players) {
       if (myBoard.banana.checkHit(player)) {
         player.death();
+        myBoard.endRoundAnimation()
         myBoard.players[player.id ? 0 : 1].score++;
         myBoard.banana = null;
       }
     }
     if (myBoard.banana.checkOutOfBounds()) myBoard.banana = null;
   }
+  myBoard.players.forEach(player => {if (!player.alive) myBoard.endRoundAnimation()})
+  if (myBoard.checkEndGame()) window.location.href = './gameover.html'
 };

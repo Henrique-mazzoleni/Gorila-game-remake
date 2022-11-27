@@ -3,22 +3,25 @@ class Banana {
     this.board = board
     this.canvas = this.board.canvas;
     this.ctx = this.board.ctx;
-    this.size = 10;
+    this.size = 12;
     this.speedX = null;
     this.speedY = null;
     this.setBanana()
   }
 
   draw() {
-    this.ctx.fillStyle = 'orange'
-    this.ctx.fillRect(this.x, this.y, this.size, this.size);
+    this.ctx.save()
+    this.ctx.translate(this.x + this.size/2, this.y + this.size/2)
+    this.ctx.rotate(Math.PI/5*Math.ceil(this.board.frame/3))
+    this.ctx.drawImage(this.image, -this.size/2, -this.size/2, this.size, this.size);
+    this.ctx.restore()
   }
 
   setBanana() {
     if (this.speedX === null) {
         const player = this.board.players[this.board.turn];
         this.y = player.y - this.size
-        if (this.board.turn === 0) this.x = player.x - player.width / 2
+        if (this.board.turn === 0) this.x = player.x - this.size
         else this.x = player.x + player.width
     }
   }
@@ -49,6 +52,7 @@ class Banana {
     }
     return false;
   }
+
   checkOutOfBounds() {
     return this.x + this.size < 0 || this.x > this.canvas.width
   }

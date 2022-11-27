@@ -10,14 +10,16 @@ class Building {
       Math.random() * (this.maxHeight - this.minHeigth) + this.minHeigth
     );
   }
+
   draw() {
-    this.ctx.fillStyle = "gray";
-    this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.ctx.drawImage(this.image, this.x, this.y, this.width, (this.width/this.image.width) * this.image.height)
   }
+
   setWidth(x) {
     this.x = x;
     this.width = Math.round(this.canvas.width / Board.numberOfBuildings);
   }
+  
   setHeight() {
     this.height = (this.height * this.canvas.height) / this.viewHeight;
     this.viewHeight = this.canvas.height;
