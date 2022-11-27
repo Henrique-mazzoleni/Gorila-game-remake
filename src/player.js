@@ -25,15 +25,18 @@ class Player {
         } else {
           [this.currImage] = this.image.filter(image => image.id === 'throw')
         }
-      } else {
+      } else if (this.alive) {
         [this.currImage] = this.image.filter(image => image.id === 'sit')
+      } else {
+        console.log('test');
+        [this.currImage] = this.image.filter(image => image.id === 'dead')
       }
-    } else {
+    } else if (this.alive) {
       if (this.board.frame % 10 === 0) {
         this.celebrate = this.celebrate ? 0 : 1 
       }
       [this.currImage] = this.image.filter(image => image.id === `celeb${this.celebrate}`)
-    }
+    } 
     this.ctx.drawImage(this.currImage, this.x, this.y, this.width, this.height)
   }
   

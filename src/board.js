@@ -56,6 +56,7 @@ class Board {
     this.loadImg(playerOne, '../imgs/don-throw.svg', 'throw')
     this.loadImg(playerOne, '../imgs/don-celebrate.svg', 'celeb0')
     this.loadImg(playerOne, '../imgs/don-celebrate-2.svg', 'celeb1')
+    this.loadImg(playerOne, '../imgs/dead.png', 'dead')
     this.players.push(playerOne);
     
     const playerTwo = new Player(Board.numberOfBuildings - Math.round(Math.random()) - 2, this, 'Player Two')
@@ -63,12 +64,13 @@ class Board {
     this.loadImg(playerTwo, '../imgs/don-throw-2.svg', 'throw')
     this.loadImg(playerTwo, '../imgs/don-celebrate.svg', 'celeb0')
     this.loadImg(playerTwo, '../imgs/don-celebrate-2.svg', 'celeb1')
+    this.loadImg(playerTwo, '../imgs/dead.png', 'dead')
     this.players.push(playerTwo);
   }
 
   setPlayers() {
     this.players.forEach((player) => {
-        if (player.alive) player.draw();
+        player.draw();
         player.place();
       });
   }

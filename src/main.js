@@ -51,15 +51,16 @@ const updateGame = () => {
       }
     }
     for (const player of myBoard.players) {
-      if (myBoard.banana.checkHit(player)) {
+      if (myBoard.banana?.checkHit(player)) {
         player.death();
-        myBoard.endRoundAnimation()
         myBoard.players[player.id ? 0 : 1].score++;
         myBoard.banana = null;
       }
     }
-    if (myBoard.banana.checkOutOfBounds()) myBoard.banana = null;
+    if (myBoard.banana?.checkOutOfBounds()) myBoard.banana = null;
   }
-  myBoard.players.forEach(player => {if (!player.alive) myBoard.endRoundAnimation()})
+  myBoard.players.forEach(player => {
+    if (!player.alive) myBoard.endRoundAnimation()
+  })
   if (myBoard.checkEndGame()) window.location.href = './gameover.html'
 };
