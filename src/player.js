@@ -44,7 +44,42 @@ class Player {
     }
     if (this.currImage) this.ctx.drawImage(this.currImage, this.x, this.y, this.width, this.width)
   }
-  
+
+  setLastLine(x, y) {
+    this.lastLine = [x, y]
+  }
+
+  drawLastLine() {
+    this.ctx.beginPath()
+    this.ctx.lineWidth = 3;
+    this.ctx.strokeStyle = 'green';
+    this.ctx.moveTo(Math.floor(this.x + this.width/2), Math.floor(this.y));
+    this.ctx.lineTo(Math.floor(this.lastLine[0]), Math.floor(this.lastLine[1]));
+    this.ctx.stroke();
+  }
+
+  drawRefrenceLine() {
+    this.ctx.beginPath()
+    this.ctx.lineWidth = 3;
+    this.ctx.strokeStyle = 'red';
+    this.ctx.moveTo(Math.floor(this.x + this.width/2), Math.floor(this.y));
+    this.ctx.lineTo(Math.floor(this.board.mouseX), Math.floor(this.board.mouseY));
+    this.ctx.stroke();
+  }
+
+  setAngleAndSpeed() {
+    if (this.id === 0) {
+      this.lineX = this.board.mouseX - this.x - this.width / 2
+    } else {
+      this.lineX = this.x + this.width/2 - this.board.mouseX
+    }
+    this.lineY = this.y - this.board.mouseY
+
+    this.speed = (this.lineX**2 + this.lineY**2)**(0.5)
+    this.angle = Math.acos(this.lineX / this.speed) * 180 / Math.PI
+    this.speed /= 5
+  }
+
   place() {
     this.x = (this.idx * this.canvas.width) / Board.numberOfBuildings +
       this.board.myBuildings[this.idx].width / 2 -

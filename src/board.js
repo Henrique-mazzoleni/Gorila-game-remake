@@ -12,6 +12,11 @@ class Board {
     this.roundOver = false;
     this.rounds = numberOfRounds
   }
+
+  setMouse(mouseX, mouseY) {
+    this.mouseX = mouseX;
+    this.mouseY = mouseY;
+  }
  
   start() {
     const body = document.querySelector("body");
@@ -96,12 +101,11 @@ class Board {
     this.myBuildings.splice(0, this.myBuildings.length);
     this.createBuildings();
     this.players.forEach((player) => {
-      player.angle = 45;
-      player.speed = 20;
       if (player.id === 0) player.idx = Math.round(Math.random()) + 1;
       else player.idx = Board.numberOfBuildings - Math.round(Math.random()) - 2;
       player.explosion = null
       player.width = 40;
+      player.lastLine = null;
     });
     this.roundOver = false
     

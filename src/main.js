@@ -6,12 +6,12 @@ const display = () => {
     myBoard.ctx.font = '13px sans-serif'
     if (player.id === 0) {
       player.ctx.fillText(`${player.name}, score: ${player.score}`, 18, 25);
-      player.ctx.fillText(`angle: ${player.angle}, speed: ${player.speed}`,18,40);
+      player.ctx.fillText(`angle: ${player.angle.toFixed(2)}, speed: ${player.speed.toFixed(2)}`,18,40);
     } else {
       player.ctx.fillText(`${player.name}, score: ${player.score}`,myBoard.canvas.width - 140,25);
       player.ctx.fillText(
-        `angle: ${player.angle}, speed: ${player.speed}`,
-        myBoard.canvas.width - 140,
+        `angle: ${player.angle.toFixed(2)}, speed: ${player.speed.toFixed(2)}`,
+        myBoard.canvas.width - 175,
         40
       );
     }
@@ -59,8 +59,13 @@ const updateGame = () => {
     }
     if (myBoard.banana?.checkOutOfBounds()) myBoard.banana = null;
   }
+
   myBoard.players.forEach(player => {
     if (!player.alive) myBoard.endRoundAnimation()
   })
   if (myBoard.checkEndGame()) window.location.href = './gameover.html'
+
+  myBoard.players[myBoard.turn].setAngleAndSpeed()
+  myBoard.players[myBoard.turn].drawRefrenceLine()
+  myBoard.players[myBoard.turn].drawLastLine()
 };
