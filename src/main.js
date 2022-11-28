@@ -45,7 +45,7 @@ const updateGame = () => {
       myBoard.banana.move();
     }
     for (const building of myBoard.myBuildings) {
-      if (myBoard.banana.checkHit(building)) {
+      if (myBoard.banana?.checkHit(building)) {
         myBoard.banana = null;
         break;
       }

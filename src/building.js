@@ -12,7 +12,9 @@ class Building {
   }
 
   draw() {
-    this.ctx.drawImage(this.image, this.x, this.y, this.width, (this.width/this.image.width) * this.image.height)
+    if (this.image) {
+      this.ctx.drawImage(this.image, this.x, this.y, this.width, (this.width/this.image.width) * this.image.height)
+    }
   }
 
   setWidth(x) {

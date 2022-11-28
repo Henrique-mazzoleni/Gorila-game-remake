@@ -99,9 +99,12 @@ class Board {
       player.angle = 45;
       player.speed = 20;
       if (player.id === 0) player.idx = Math.round(Math.random()) + 1;
-      else Board.numberOfBuildings - Math.round(Math.random()) - 2;
+      else player.idx = Board.numberOfBuildings - Math.round(Math.random()) - 2;
+      player.explosion = null
+      player.width = 40;
     });
     this.roundOver = false
+    
   }
 
   checkEndGame() {
