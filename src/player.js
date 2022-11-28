@@ -6,9 +6,9 @@ class Player {
     this.ctx = this.board.ctx;
     this.width = 40;
     this.idx = idx;
-    this.angle = 45;
-    this.speed = 20;
     this.score = 0;
+    this.angle = 0;
+    this.speed = 0;
     if (idx < board.myBuildings.length / 2) this.id = 0;
     else this.id = 1;
     this.alive = true;
@@ -50,12 +50,14 @@ class Player {
   }
 
   drawLastLine() {
-    this.ctx.beginPath()
-    this.ctx.lineWidth = 3;
-    this.ctx.strokeStyle = 'green';
-    this.ctx.moveTo(Math.floor(this.x + this.width/2), Math.floor(this.y));
-    this.ctx.lineTo(Math.floor(this.lastLine[0]), Math.floor(this.lastLine[1]));
-    this.ctx.stroke();
+    if (this.lastLine) {
+      this.ctx.beginPath()
+      this.ctx.lineWidth = 3;
+      this.ctx.strokeStyle = 'green';
+      this.ctx.moveTo(Math.floor(this.x + this.width/2), Math.floor(this.y));
+      this.ctx.lineTo(Math.floor(this.lastLine[0]), Math.floor(this.lastLine[1]));
+      this.ctx.stroke();
+    }
   }
 
   drawRefrenceLine() {
