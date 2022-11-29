@@ -55,8 +55,8 @@ class Board {
     });
   }
 
-  createPlayers() {
-    const playerOne = new Player(Math.round(Math.random()) + 1, this, 'Player One')
+  createPlayers(playerOneName, playerTwoName) {
+    const playerOne = new Player(Math.round(Math.random()) + 1, this, playerOneName)
     this.loadImg(playerOne, '../imgs/don-sit.svg', 'sit')
     this.loadImg(playerOne, '../imgs/don-throw.svg', 'throw')
     this.loadImg(playerOne, '../imgs/don-celebrate.svg', 'celeb0')
@@ -64,7 +64,7 @@ class Board {
     this.loadImg(playerOne, '../imgs/dead.png', 'dead')
     this.players.push(playerOne);
     
-    const playerTwo = new Player(Board.numberOfBuildings - Math.round(Math.random()) - 2, this, 'Player Two')
+    const playerTwo = new Player(Board.numberOfBuildings - Math.round(Math.random()) - 2, this, playerTwoName)
     this.loadImg(playerTwo, '../imgs/don-sit-2.svg', 'sit')
     this.loadImg(playerTwo, '../imgs/don-throw-2.svg', 'throw')
     this.loadImg(playerTwo, '../imgs/don-celebrate.svg', 'celeb0')

@@ -1,26 +1,29 @@
-const myBoard = new Board(1, 5);
+const url = new URL(document.location.href)
+const params = new URLSearchParams(url.search)
+
+const myBoard = new Board(1, +params.get('r'));
 
 const display = () => {
   for (const player of myBoard.players) {
     myBoard.ctx.fillStyle = "black";
-    myBoard.ctx.font = "13px sans-serif";
+    myBoard.ctx.font = "25px sans-serif";
     if (player.id === 0) {
-      player.ctx.fillText(`${player.name}, score: ${player.score}`, 18, 25);
+      player.ctx.fillText(`${player.name}, score: ${player.score}`, 30, 50);
       player.ctx.fillText(
         `angle: ${player.angle.toFixed(2)}, speed: ${player.speed.toFixed(2)}`,
-        18,
-        40
+        30,
+        80
       );
     } else {
       player.ctx.fillText(
         `${player.name}, score: ${player.score}`,
-        myBoard.canvas.width - 140,
-        25
+        myBoard.canvas.width - 280,
+        50
       );
       player.ctx.fillText(
         `angle: ${player.angle.toFixed(2)}, speed: ${player.speed.toFixed(2)}`,
-        myBoard.canvas.width - 175,
-        40
+        myBoard.canvas.width - 350,
+        80
       );
     }
   }
@@ -38,7 +41,7 @@ const setWindow = () => {
 const start = () => {
   myBoard.start();
   myBoard.createBuildings();
-  myBoard.createPlayers();
+  myBoard.createPlayers(params.get('pl1'), params.get('pl2'));
 };
 
 const updateGame = () => {

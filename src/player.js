@@ -19,7 +19,10 @@ class Player {
 
   draw() {
     if (this.board.players[this.id ? 0 : 1].alive) {
-      if (this.board.turn !== this.id) {
+      if (!this.alive) {
+        if (this.board.frame % 10 === 0)
+        this.currImage = this.image?.find(image => image.id === 'dead')
+      } else if (this.board.turn !== this.id) {
         if (!this.board.banana?.speedX) {
           this.currImage = this.image?.find(image => image.id === 'sit')
         } else {
@@ -27,9 +30,6 @@ class Player {
         }
       } else if (this.alive) {
         this.currImage = this.image?.find(image => image.id === 'sit')
-      } else {
-        if (this.board.frame % 10 === 0)
-        this.currImage = this.image?.find(image => image.id === 'dead')
       }
     } else if (this.alive) {
       if (this.board.frame % 10 === 0) {

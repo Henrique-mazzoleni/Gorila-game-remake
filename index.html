@@ -8,12 +8,39 @@
     <title>Gorillas | Welcome</title>
   </head>
   <body>
-    <header>
-      <h1>Welcome to Gorillas</h1>
-    </header>
-    <button>
-      <a href="/game.html">Start!</a>
-    </button>
-    <a href="http://www.freepik.com">Designed by Vectorpocket / Freepik</a>
+    <div class="overlay"></div>
+    <section id="content">
+
+      <header>
+        <h1>Welcome to Gorillas</h1>
+        <p>A duel to the death! Battle against your friends in the skyline of Banana City.</p>
+        <p>You are a very angry gorilla, armed with an unlimited amount of exploding bananas.</p>
+        <p>Your goal? To hit your opponent before he can find his target: you!</p>
+        <p>Who will be the winner?</p>
+
+      </header>
+      <form>
+        <h2>Set up your game!</h2>
+        <div class="first-player">
+          <label for="name1">First Player</label>
+          <input type="text" id="name1" placeholder="Player One">
+        </div>
+        <div class="second-player">
+          <label for="name2">Second Player</label>
+          <input type="text" id="name2" placeholder="Player Two">
+        </div>
+        <div class="rounds">
+          <label for="rounds">How many rounds do you want to play?</label>
+          <input type="number" min="0" max="10" id="rounds" placeholder="3">
+        </div>
+        <button>
+          Start!
+        </button>
+      </form>
+      <footer>
+        <a href="http://www.freepik.com">Background Image Designed by Vectorpocket / Freepik</a>
+      </footer>
+    </section>
+    <script type="text/javascript" src="./src/welcome.js"></script>
   </body>
 </html>
