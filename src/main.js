@@ -77,7 +77,24 @@ const updateGame = () => {
   myBoard.players.forEach((player) => {
     if (!player.alive) myBoard.endRoundAnimation();
   });
-  if (myBoard.checkEndGame()) window.location.href = "./gameover.html";
+  if (myBoard.checkEndGame()) {
+    const gameoverURL = new URL(window.location.origin)
+    gameoverURL.pathname = '/gameover.html'
+    const gameoverParams = new URLSearchParams()
+
+    const winner = myBoard.players.find(player => player.score == params.get('r'))
+    const loser = myBoard.players.find(player => player !== winner)
+    
+    gameoverParams.append('w', winner.name)
+    gameoverParams.append('l', loser.name)
+    gameoverParams.append('diff', winner.score / (winner.score + loser.score))
+
+    gameoverURL.search = gameoverParams
+
+    setTimeout(() => {
+      window.location.href = gameoverURL
+    }, 2000)
+  }
 
   myBoard.players[myBoard.turn].setAngleAndSpeed();
 };

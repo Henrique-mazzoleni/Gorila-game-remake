@@ -1,6 +1,6 @@
-let url = new URL(document.location.href)
+const url = new URL(document.location.href)
 url.pathname = 'game.html'
-let params = new URLSearchParams(url.search)
+const params = new URLSearchParams(url.search)
 
 const playerOneName = document.querySelector('.first-player input')
 const playerTwoName = document.querySelector('.second-player input')
