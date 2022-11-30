@@ -3,7 +3,7 @@ class Banana {
     this.board = board
     this.canvas = this.board.canvas;
     this.ctx = this.board.ctx;
-    this.size = 12;
+    this.size = 16;
     this.speedX = null;
     this.speedY = null;
     this.setBanana()

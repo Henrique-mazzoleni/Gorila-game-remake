@@ -1,5 +1,5 @@
 class Board {
-  static numberOfBuildings = Math.round(window.innerWidth / 80);
+  static numberOfBuildings = Math.round(window.innerWidth / 113);
 
   constructor(gravity, numberOfRounds) {
     this.frame = 0;
@@ -104,7 +104,7 @@ class Board {
       if (player.id === 0) player.idx = Math.round(Math.random()) + 1;
       else player.idx = Board.numberOfBuildings - Math.round(Math.random()) - 2;
       player.explosion = null
-      player.width = 40;
+      player.width = 60;
       player.lastLine = null;
     });
     this.roundOver = false

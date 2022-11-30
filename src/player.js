@@ -4,7 +4,7 @@ class Player {
     this.board = board;
     this.canvas = this.board.canvas;
     this.ctx = this.board.ctx;
-    this.width = 40;
+    this.width = 60;
     this.idx = idx;
     this.score = 0;
     this.angle = 0;
@@ -38,7 +38,7 @@ class Player {
       this.currImage = this.image?.find(image => image.id === `celeb${this.celebrate}`)
     } 
     
-    if (this.explosion && this.explosion < 80) {
+    if (this.explosion && this.explosion < 120) {
       this.explosion += 7
       this.width = this.explosion
     }
@@ -79,7 +79,7 @@ class Player {
 
     this.speed = (this.lineX**2 + this.lineY**2)**(0.5)
     this.angle = Math.acos(this.lineX / this.speed) * 180 / Math.PI
-    this.speed /= 5
+    this.speed /= 8
   }
 
   place() {
