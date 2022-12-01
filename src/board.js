@@ -42,7 +42,7 @@ class Board {
     for (let i = 0; i < Board.numberOfBuildings; i++) {
       const building = new Building(this)
       const imgIdx = Math.ceil(Math.random()*6)
-      this.loadImg(building, `../imgs/Building0${imgIdx}.svg`)
+      this.loadImg(building, `./imgs/Building0${imgIdx}.svg`)
       myBoard.myBuildings.push(building);
     }
   }
@@ -57,19 +57,19 @@ class Board {
 
   createPlayers(playerOneName, playerTwoName) {
     const playerOne = new Player(Math.round(Math.random()) + 1, this, playerOneName)
-    this.loadImg(playerOne, '../imgs/don-sit.svg', 'sit')
-    this.loadImg(playerOne, '../imgs/don-throw.svg', 'throw')
-    this.loadImg(playerOne, '../imgs/don-celebrate.svg', 'celeb0')
-    this.loadImg(playerOne, '../imgs/don-celebrate-2.svg', 'celeb1')
-    this.loadImg(playerOne, '../imgs/dead.png', 'dead')
+    this.loadImg(playerOne, './imgs/don-sit.svg', 'sit')
+    this.loadImg(playerOne, './imgs/don-throw.svg', 'throw')
+    this.loadImg(playerOne, './imgs/don-celebrate.svg', 'celeb0')
+    this.loadImg(playerOne, './imgs/don-celebrate-2.svg', 'celeb1')
+    this.loadImg(playerOne, './imgs/dead.png', 'dead')
     this.players.push(playerOne);
     
     const playerTwo = new Player(Board.numberOfBuildings - Math.round(Math.random()) - 2, this, playerTwoName)
-    this.loadImg(playerTwo, '../imgs/don-sit-2.svg', 'sit')
-    this.loadImg(playerTwo, '../imgs/don-throw-2.svg', 'throw')
-    this.loadImg(playerTwo, '../imgs/don-celebrate.svg', 'celeb0')
-    this.loadImg(playerTwo, '../imgs/don-celebrate-2.svg', 'celeb1')
-    this.loadImg(playerTwo, '../imgs/dead.png', 'dead')
+    this.loadImg(playerTwo, './imgs/don-sit-2.svg', 'sit')
+    this.loadImg(playerTwo, './imgs/don-throw-2.svg', 'throw')
+    this.loadImg(playerTwo, './imgs/don-celebrate.svg', 'celeb0')
+    this.loadImg(playerTwo, './imgs/don-celebrate-2.svg', 'celeb1')
+    this.loadImg(playerTwo, './imgs/dead.png', 'dead')
     this.players.push(playerTwo);
   }
 
@@ -82,7 +82,7 @@ class Board {
 
   newBanana() {
     this.banana = new Banana(this)
-    this.loadImg(this.banana, '../imgs/banana.svg')
+    this.loadImg(this.banana, './imgs/banana.svg')
   }
 
   endRoundAnimation() {
