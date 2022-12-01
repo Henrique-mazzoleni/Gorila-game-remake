@@ -19,8 +19,7 @@ class Board {
   }
  
   start() {
-    const body = document.querySelector("body");
-    body.prepend(this.canvas);
+    content.appendChild(this.canvas);
     this.interval = setInterval(updateGame, 30);
   }
 
@@ -86,12 +85,12 @@ class Board {
   }
 
   endRoundAnimation() {
-    this.ctx.fillStyle = 'black'
-    this.ctx.font = '25px sans-serif'
-    this.ctx.shadowColor = 'white'
-    this.ctx.shadowBlur = 7
+    this.ctx.fillStyle = '#f1c232'
+    this.ctx.font = '40px bananasplit'
+    content.classList.add('overlay')
     this.players.forEach(player => {
-      if (player.alive) this.ctx.fillText(`${player.name} wins this round!`, 200, 100)
+
+      if (player.alive) this.ctx.fillText(`${player.name} wins this round!`, this.canvas.width / 2 - 280, 200)
     })
   }
 
@@ -108,7 +107,7 @@ class Board {
       player.lastLine = null;
     });
     this.roundOver = false
-    
+    content.classList.remove('overlay')
   }
 
   checkEndGame() {

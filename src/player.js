@@ -90,7 +90,7 @@ class Player {
   }
 
   death() {
-    setTimeout(() => this.board.newRound(), 3000)
+    setTimeout(() => this.board.newRound(), 5000)
     this.explosion = 1;
     this.alive = false;
     this.board.roundOver = true;

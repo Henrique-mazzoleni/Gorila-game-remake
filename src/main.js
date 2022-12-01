@@ -2,11 +2,12 @@ const url = new URL(document.location.href)
 const params = new URLSearchParams(url.search)
 
 const myBoard = new Board(1, +params.get('r'));
+const content = document.querySelector('#content')
 
 const display = () => {
   for (const player of myBoard.players) {
     myBoard.ctx.fillStyle = "black";
-    myBoard.ctx.font = "25px sans-serif";
+    myBoard.ctx.font = "25px bananasplit";
     if (player.id === 0) {
       player.ctx.fillText(`${player.name}, score: ${player.score}`, 30, 50);
       player.ctx.fillText(
@@ -22,7 +23,7 @@ const display = () => {
       );
       player.ctx.fillText(
         `angle: ${player.angle.toFixed(2)}, speed: ${player.speed.toFixed(2)}`,
-        myBoard.canvas.width - 350,
+        myBoard.canvas.width - 300,
         80
       );
     }
@@ -78,7 +79,7 @@ const updateGame = () => {
     if (!player.alive) myBoard.endRoundAnimation();
   });
   if (myBoard.checkEndGame()) {
-    const gameoverURL = new URL(window.location.origin)
+    const gameoverURL = new URL(window.location.href)
     gameoverURL.pathname = '/gameover.html'
     const gameoverParams = new URLSearchParams()
 
@@ -93,7 +94,7 @@ const updateGame = () => {
 
     setTimeout(() => {
       window.location.href = gameoverURL
-    }, 2000)
+    }, 1000)
   }
 
   myBoard.players[myBoard.turn].setAngleAndSpeed();
