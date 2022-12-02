@@ -1,4 +1,4 @@
-const url = new URL(document.location.origin)
+const url = new URL(document.location.href)
 const params = new URLSearchParams(url.search)
 
 const myBoard = new Board(1, +params.get('r'));
@@ -86,9 +86,9 @@ const updateGame = () => {
     const winner = myBoard.players.find(player => player.score == params.get('r'))
     const loser = myBoard.players.find(player => player !== winner)
     
-    gameoverParams.append('w', winner.name)
-    gameoverParams.append('l', loser.name)
-    gameoverParams.append('diff', winner.score / (winner.score + loser.score))
+    gameoverParams.append('w', winner?.name)
+    gameoverParams.append('l', loser?.name)
+    gameoverParams.append('diff', winner?.score / (winner?.score + loser?.score))
 
     gameoverURL.search = gameoverParams
 
