@@ -1,4 +1,4 @@
-const url = new URL(document.location.href)
+const url = new URL(document.location.origin)
 const params = new URLSearchParams(url.search)
 
 const myBoard = new Board(1, +params.get('r'));
@@ -80,7 +80,7 @@ const updateGame = () => {
   });
   if (myBoard.checkEndGame()) {
     const gameoverURL = new URL(window.location.href)
-    gameoverURL.pathname = '/gameover.html'
+    gameoverURL.pathname = '/Gorila-game-remake/gameover.html'
     const gameoverParams = new URLSearchParams()
 
     const winner = myBoard.players.find(player => player.score == params.get('r'))
