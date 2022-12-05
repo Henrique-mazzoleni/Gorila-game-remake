@@ -47,6 +47,7 @@ class Banana {
       obstacle.x + obstacle.width > this.x
     ) {
       if (obstacle.y < this.y + this.size) {
+        if (!obstacle.name) this.board.hitList.push([this.x, this.y])
         return true;
       }
     }

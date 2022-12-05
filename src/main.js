@@ -37,6 +37,7 @@ const setWindow = () => {
   display();
   myBoard.setPlayers();
   myBoard.setBuildings();
+  myBoard.drawDamage();
 };
 
 const start = () => {

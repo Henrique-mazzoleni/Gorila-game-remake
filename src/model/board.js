@@ -10,7 +10,8 @@ class Board {
     this.players = [];
     this.turn = 0;
     this.roundOver = false;
-    this.rounds = numberOfRounds
+    this.rounds = numberOfRounds;
+    this.hitList = [];
   }
 
   setMouse(mouseX, mouseY) {
@@ -84,6 +85,17 @@ class Board {
     this.loadImg(this.banana, './imgs/banana.svg')
   }
 
+  drawDamage() {
+    this.hitList.forEach(hit => {
+      this.ctx.save()
+      this.ctx.beginPath()
+      this.ctx.arc(hit[0], hit[1], 30, 0, 2*Math.PI)
+      this.ctx.clip()
+      this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height)
+      this.ctx.restore()
+    })
+  }
+
   endRoundAnimation() {
     this.ctx.fillStyle = '#f1c232'
     this.ctx.font = '40px bananasplit'
@@ -107,6 +119,7 @@ class Board {
       player.lastLine = null;
     });
     this.roundOver = false
+    this.hitList = []
     content.classList.remove('overlay')
   }
 
