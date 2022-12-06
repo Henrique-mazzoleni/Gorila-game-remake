@@ -12,12 +12,10 @@ I've taken the liberty to enhance a few things about the old game.
 - Firstly the gravity input was taken out for simplicity sake.
 - The graphics have also changed to give it a more modern look.
 - The input was changed from a simple text input to a mouse capture with a mouse click release.
-- The buildings don't take damage but that is something that I still want to implement.
 
 ### Future additions
 
 There are some aspects that I still want to go through and enhance in the game.
-- Make the buildings take damage like the original game.
 - Add a computer player so it can be played as a one player game.
 - Add Sounds and music!
 - adapt the game to be playable on mobile
