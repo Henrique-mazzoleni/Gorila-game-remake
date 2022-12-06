@@ -12,6 +12,7 @@ class Board {
     this.roundOver = false;
     this.rounds = numberOfRounds;
     this.hitList = [];
+    this.hitSize = 30;
   }
 
   setMouse(mouseX, mouseY) {
@@ -89,7 +90,7 @@ class Board {
     this.hitList.forEach(hit => {
       this.ctx.save()
       this.ctx.beginPath()
-      this.ctx.arc(hit[0], hit[1], 30, 0, 2*Math.PI)
+      this.ctx.arc(hit.x, hit.y, this.hitSize, 0, 2*Math.PI)
       this.ctx.clip()
       this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height)
       this.ctx.restore()

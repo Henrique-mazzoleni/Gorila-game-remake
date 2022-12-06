@@ -72,6 +72,14 @@ const updateGame = () => {
         myBoard.players[player.id ? 0 : 1].score++;
         myBoard.banana = null;
       }
+      for(const hit of myBoard.hitList) {
+        const distance = ((hit.x - player.x)**2 + (hit.y - player.y)**2)**0.5
+        if (distance < myBoard.hitSize + player.width) {
+          player.death();
+          myBoard.players[player.id ? 0 : 1].score++;
+          myBoard.banana = null;
+        }
+      }
     }
     if (myBoard.banana?.checkOutOfBounds()) myBoard.banana = null;
   }

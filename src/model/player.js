@@ -77,8 +77,9 @@ class Player {
     }
     this.lineY = this.y - this.board.mouseY
 
-    this.speed = (this.lineX**2 + this.lineY**2)**(0.5)
-    this.angle = Math.acos(this.lineX / this.speed) * 180 / Math.PI
+    this.speed = (this.lineX**2 + this.lineY**2)**(0.5);
+    this.angle = Math.acos(this.lineX / this.speed) * 180 / Math.PI;
+    if (this.lineY < 0) this.angle *= -1;
     this.speed /= 8
   }
 

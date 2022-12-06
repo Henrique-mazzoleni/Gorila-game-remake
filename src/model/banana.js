@@ -44,12 +44,15 @@ class Banana {
   checkHit(obstacle) {
     if (
       obstacle.x < this.x + this.size &&
-      obstacle.x + obstacle.width > this.x
+      obstacle.x + obstacle.width > this.x &&
+      obstacle.y < this.y + this.size
     ) {
-      if (obstacle.y < this.y + this.size) {
-        if (!obstacle.name) this.board.hitList.push([this.x, this.y])
-        return true;
+      for (const hit of this.board.hitList) {
+        const distance = ((hit.x - this.x)**2 + (hit.y - this.y)**2)**0.5
+        if (distance < this.board.hitSize) return false
       }
+      if (!obstacle.name) this.board.hitList.push({x: this.x, y: this.y})
+      return true;
     }
     return false;
   }

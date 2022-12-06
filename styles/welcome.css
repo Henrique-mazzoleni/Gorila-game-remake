@@ -17,14 +17,6 @@ html {
   font-size: 25px;
 }
 
-.overlay {
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -33,6 +25,7 @@ a {
 body {
   position: relative;
   background: url(../imgs/586.jpg) no-repeat center center/cover;
+  box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.5);
   z-index: 1;
 }
 
@@ -43,8 +36,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  gap: 60px;
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
   z-index: 5;
 }
 
