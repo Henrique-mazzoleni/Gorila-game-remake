@@ -15,6 +15,8 @@ class Player {
     this.celebrate = 0;
     this.currImage = null;
     this.explosion = null;
+    if (this.name === 'computer') this.type = 'cpu'
+    else this.type = 'Human'
   }
 
   draw() {
@@ -65,7 +67,12 @@ class Player {
     this.ctx.lineWidth = 3;
     this.ctx.strokeStyle = 'red';
     this.ctx.moveTo(Math.floor(this.x + this.width/2), Math.floor(this.y));
-    this.ctx.lineTo(Math.floor(this.board.mouseX), Math.floor(this.board.mouseY));
+    if (this.name === 'computer') {
+      const endX = this.x + this.width/2 - this.speed * 8 * Math.cos(this.angle*Math.PI/180)
+      const endY = this.y - this.speed * 8 * Math.sin(this.angle*Math.PI/180)
+      this.ctx.lineTo(Math.floor(endX), Math.floor(endY));
+    }
+    else this.ctx.lineTo(Math.floor(this.board.mouseX), Math.floor(this.board.mouseY));
     this.ctx.stroke();
   }
 
@@ -95,5 +102,15 @@ class Player {
     this.explosion = 1;
     this.alive = false;
     this.board.roundOver = true;
+  }
+
+  cpuPlay() {
+    if (this.speed === 0) {
+      this.angle = Math.random()*90
+      this.speed = Math.random()*70 + 20
+      setTimeout(() => {
+        this.board.banana.throw()
+      }, 1000)
+    }
   }
 }

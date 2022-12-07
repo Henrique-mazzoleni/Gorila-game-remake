@@ -41,9 +41,11 @@ document.querySelector('#add-form').addEventListener('click', (event) => {
     formContainer.appendChild(form)
 
     const url = new URL(document.location.href)
-    url.pathname = '/Gorila-game-remake/game.html'
-    const params = new URLSearchParams(url.search)
 
+    if (document.location.hostname === 'localhost') url.pathname = '/game.html'
+    else url.pathname = '/Gorila-game-remake/game.html'
+    
+    const params = new URLSearchParams(url.search)
 
     const playerOneName = document.querySelector('.first-player input')
     const playerTwoName = document.querySelector('.second-player input')

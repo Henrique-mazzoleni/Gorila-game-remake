@@ -102,7 +102,6 @@ class Board {
     this.ctx.font = '40px bananasplit'
     content.classList.add('overlay')
     this.players.forEach(player => {
-
       if (player.alive) this.ctx.fillText(`${player.name} wins this round!`, this.canvas.width / 2 - 280, 200)
     })
   }

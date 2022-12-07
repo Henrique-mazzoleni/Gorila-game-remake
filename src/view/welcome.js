@@ -1,5 +1,8 @@
 const url = new URL(document.location.origin)
-url.pathname = '/Gorila-game-remake/game.html'
+
+if (document.location.hostname === 'localhost') url.pathname = '/game.html'
+else url.pathname = '/Gorila-game-remake/game.html'
+
 const params = new URLSearchParams(url.search)
 
 const playerOneName = document.querySelector('.first-player input')

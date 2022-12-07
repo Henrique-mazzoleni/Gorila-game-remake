@@ -1,6 +1,10 @@
 const url = new URL(document.location.href)
 const params = new URLSearchParams(url.search)
 
+const gameoverURL = new URL(window.location.href)
+if (window.location.hostname === 'localhost') gameoverURL.pathname = '/gameover.html'
+else gameoverURL.pathname = '/Gorila-game-remake/gameover.html'
+
 const myBoard = new Board(1, +params.get('r'));
 const content = document.querySelector('#content')
 
@@ -51,8 +55,10 @@ const updateGame = () => {
   myBoard.frame++;
 
   if (!myBoard.roundOver) {
+    
     if (!myBoard.banana) myBoard.newBanana();
     myBoard.banana.setBanana();
+    
     if (myBoard.banana.speedX || myBoard.banana.speedY) {
       myBoard.banana.draw();
       myBoard.banana.move();
@@ -60,22 +66,26 @@ const updateGame = () => {
       myBoard.players[myBoard.turn].drawRefrenceLine();
       myBoard.players[myBoard.turn].drawLastLine();
     }
+    
     for (const building of myBoard.myBuildings) {
       if (myBoard.banana?.checkHit(building)) {
         myBoard.banana = null;
         break;
       }
     }
+    
     for (const player of myBoard.players) {
       if (myBoard.banana?.checkHit(player)) {
         player.death();
         myBoard.players[player.id ? 0 : 1].score++;
         myBoard.banana = null;
       }
-      for(const hit of myBoard.hitList) {
+
+      for (const hit of myBoard.hitList) {
         const distance = ((hit.x - player.x)**2 + (hit.y - player.y)**2)**0.5
         if (distance < myBoard.hitSize + player.width) {
           player.death();
+          myBoard.hitList = myBoard.hitList.filter(buildingHit => buildingHit !== hit)
           myBoard.players[player.id ? 0 : 1].score++;
           myBoard.banana = null;
         }
@@ -83,18 +93,17 @@ const updateGame = () => {
     }
     if (myBoard.banana?.checkOutOfBounds()) myBoard.banana = null;
   }
+  
+  // if (myBoard.players[myBoard.turn].name === 'computer') myBoard.players[myBoard.turn].cpuPlay();
+  myBoard.players[myBoard.turn].setAngleAndSpeed();
 
-  myBoard.players.forEach((player) => {
-    if (!player.alive) myBoard.endRoundAnimation();
-  });
+  myBoard.players.forEach((player) => {if (!player.alive) myBoard.endRoundAnimation()})
+
   if (myBoard.checkEndGame()) {
-    const gameoverURL = new URL(window.location.href)
-    gameoverURL.pathname = '/Gorila-game-remake/gameover.html'
-    const gameoverParams = new URLSearchParams()
-
     const winner = myBoard.players.find(player => player.score == params.get('r'))
     const loser = myBoard.players.find(player => player !== winner)
     
+    const gameoverParams = new URLSearchParams()
     gameoverParams.append('w', winner?.name)
     gameoverParams.append('l', loser?.name)
     gameoverParams.append('diff', winner?.score / (winner?.score + loser?.score))
@@ -105,6 +114,5 @@ const updateGame = () => {
       window.location.href = gameoverURL
     }, 1000)
   }
-
-  myBoard.players[myBoard.turn].setAngleAndSpeed();
+  
 };
