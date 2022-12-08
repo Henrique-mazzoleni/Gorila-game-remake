@@ -44,61 +44,82 @@ const setWindow = () => {
   myBoard.drawDamage();
 };
 
+
 const start = () => {
   myBoard.start();
   myBoard.createBuildings();
   myBoard.createPlayers(params.get('pl1'), params.get('pl2'));
 };
 
+const resetPlayers = () => {
+  for (const player of myBoard.players) {
+    player.speed = 0;
+    player.angle = 0;
+  }
+}
+
 const updateGame = () => {
   setWindow();
   myBoard.frame++;
 
   if (!myBoard.roundOver) {
-    
+    // create new banana and put banana on the player who's turn it is
     if (!myBoard.banana) myBoard.newBanana();
     myBoard.banana.setBanana();
     
+    // if banana is moving
     if (myBoard.banana.speedX || myBoard.banana.speedY) {
+      // draw banana animation 
       myBoard.banana.draw();
       myBoard.banana.move();
-    } else {
-      myBoard.players[myBoard.turn].drawRefrenceLine();
-      myBoard.players[myBoard.turn].drawLastLine();
-    }
-    
-    for (const building of myBoard.myBuildings) {
-      if (myBoard.banana?.checkHit(building)) {
-        myBoard.banana = null;
-        break;
-      }
-    }
-    
-    for (const player of myBoard.players) {
-      if (myBoard.banana?.checkHit(player)) {
-        player.death();
-        myBoard.players[player.id ? 0 : 1].score++;
-        myBoard.banana = null;
-      }
 
-      for (const hit of myBoard.hitList) {
-        const distance = ((hit.x - player.x)**2 + (hit.y - player.y)**2)**0.5
-        if (distance < myBoard.hitSize + player.width) {
-          player.death();
-          myBoard.hitList = myBoard.hitList.filter(buildingHit => buildingHit !== hit)
-          myBoard.players[player.id ? 0 : 1].score++;
+      // goes thrown buildings and checks for colision with banana
+      for (const building of myBoard.myBuildings) {
+        if (myBoard.banana?.checkHit(building)) {
           myBoard.banana = null;
+          resetPlayers()
+          break;
         }
       }
-    }
-    if (myBoard.banana?.checkOutOfBounds()) myBoard.banana = null;
-  }
+      
+      // goes through players and checks for hits and then checks if the explosion radius hits player
+      for (const player of myBoard.players) {
+        if (myBoard.banana?.checkHit(player)) {
+          player.death();
+          myBoard.players[player.id ? 0 : 1].score++;
+          resetPlayers()
+          myBoard.banana = null;
+        }
   
-  // if (myBoard.players[myBoard.turn].name === 'computer') myBoard.players[myBoard.turn].cpuPlay();
-  myBoard.players[myBoard.turn].setAngleAndSpeed();
+        for (const hit of myBoard.hitList) {
+          const distance = ((hit.x - player.x)**2 + (hit.y - player.y)**2)**0.5
+          if (distance < myBoard.hitSize + player.width) {
+            player.death();
+            myBoard.hitList = myBoard.hitList.filter(buildingHit => buildingHit !== hit)
+            myBoard.players[player.id ? 0 : 1].score++;
+            myBoard.banana = null;
+          }
+        }
+      }
+  
+      // checks if banana is out of bounds on x
+      if (myBoard.banana?.checkOutOfBounds()) myBoard.banana = null;
+    } else { // if banana is not moving
+      // draw the refrence lines
+      myBoard.players[myBoard.turn].drawRefrenceLine();
+      myBoard.players[myBoard.turn].drawLastLine();
 
-  myBoard.players.forEach((player) => {if (!player.alive) myBoard.endRoundAnimation()})
+      // if player is cpu throw automatically
+      if (myBoard.players[myBoard.turn].type === 'cpu') myBoard.players[myBoard.turn].cpuPlay();
+      // else capture mouse and calculate angle and speed
+      else myBoard.players[myBoard.turn].setAngleAndSpeed();
 
+      // check if on of the players was hit and play end round animation
+      myBoard.players.forEach((player) => {if (!player.alive) myBoard.endRoundAnimation()})
+    }
+  }
+
+  // check for end game and redirect to end game screen
   if (myBoard.checkEndGame()) {
     const winner = myBoard.players.find(player => player.score == params.get('r'))
     const loser = myBoard.players.find(player => player !== winner)

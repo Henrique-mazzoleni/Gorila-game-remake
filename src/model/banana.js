@@ -21,8 +21,7 @@ class Banana {
     if (this.speedX === null) {
         const player = this.board.players[this.board.turn];
         this.y = player.y - this.size
-        if (this.board.turn === 0) this.x = player.x - this.size
-        else this.x = player.x + player.width
+        this.x = player.x + player.width/2 - this.size/2
     }
   }
 
