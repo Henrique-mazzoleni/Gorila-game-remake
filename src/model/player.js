@@ -105,12 +105,16 @@ class Player {
   }
 
   cpuPlay() {
-    if (this.speed === 0) {
-      this.angle = Math.random()*90
-      this.speed = Math.random()*70 + 20
+    if (!this.interval) {
+      this.interval = setInterval(()=> {
+        this.angle = Math.random()*60 + 15
+        this.speed = Math.random()*30 + 20
+      }, 600)
       setTimeout(() => {
         this.board.banana.throw()
-      }, 1000)
+        clearInterval(this.interval)
+        this.interval = null;
+      }, 2000)
     }
   }
 }

@@ -51,13 +51,6 @@ const start = () => {
   myBoard.createPlayers(params.get('pl1'), params.get('pl2'));
 };
 
-const resetPlayers = () => {
-  for (const player of myBoard.players) {
-    player.speed = 0;
-    player.angle = 0;
-  }
-}
-
 const updateGame = () => {
   setWindow();
   myBoard.frame++;
@@ -77,7 +70,6 @@ const updateGame = () => {
       for (const building of myBoard.myBuildings) {
         if (myBoard.banana?.checkHit(building)) {
           myBoard.banana = null;
-          resetPlayers()
           break;
         }
       }
@@ -87,7 +79,6 @@ const updateGame = () => {
         if (myBoard.banana?.checkHit(player)) {
           player.death();
           myBoard.players[player.id ? 0 : 1].score++;
-          resetPlayers()
           myBoard.banana = null;
         }
   
