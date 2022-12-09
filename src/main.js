@@ -84,7 +84,7 @@ const updateGame = () => {
   
         for (const hit of myBoard.hitList) {
           const distance = ((hit.x - player.x)**2 + (hit.y - player.y)**2)**0.5
-          if (distance < myBoard.hitSize + player.width) {
+          if (distance < (myBoard.hitSize + player.width)*0.7) {
             player.death();
             myBoard.hitList = myBoard.hitList.filter(buildingHit => buildingHit !== hit)
             myBoard.players[player.id ? 0 : 1].score++;

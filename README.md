@@ -9,7 +9,7 @@ This small project had the goal of developing a game using only HTML, CSS and JS
 
 I've taken the liberty to enhance a few things about the old game.
 
-- Firstly the gravity input was taken out for simplicity sake.
+- Firstly the gravity input was taken out for simplicity sake as it was deamed as unnecessary.
 - The graphics have also changed to give it a more modern look.
 - The input was changed from a simple text input to a mouse capture with a mouse click release.
 

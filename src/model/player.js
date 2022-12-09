@@ -17,6 +17,7 @@ class Player {
     this.explosion = null;
     if (this.name === 'computer') this.type = 'cpu'
     else this.type = 'Human'
+    this.guesses = []
   }
 
   draw() {
@@ -105,16 +106,38 @@ class Player {
   }
 
   cpuPlay() {
+    this.calculatingHits()
     if (!this.interval) {
       this.interval = setInterval(()=> {
-        this.angle = Math.random()*60 + 15
-        this.speed = Math.random()*30 + 20
+        ({ angle: this.angle, speed: this.speed } = this.guesses[Math.floor(Math.random()*this.guesses.length)])
       }, 600)
       setTimeout(() => {
         this.board.banana.throw()
         clearInterval(this.interval)
         this.interval = null;
+        this.guesses = [];
       }, 2000)
+    }
+  }
+
+  calculatingHits() {
+    let y0, v, building, d;
+    const g = this.board.gravity
+    if (!this.guesses.length) {
+      for (let i=0; i<= this.board.myBuildings.length/3; i++) {
+        building = this.board.myBuildings[i]
+        y0 = building.y + this.width - this.y
+        d = this.x + this.width/2 - building.x - building.width/2
+        for (let teta=50; teta<=80; teta+=10) {
+          const numerator = d * g
+          const tetaRad = teta * Math.PI /180
+          const cosTeta = Math.cos(tetaRad)
+          const tanTeta = Math.tan(tetaRad)
+          const raiz = 2*(g*y0 + d*g*tanTeta)
+          v = numerator / (cosTeta*(raiz)**0.5)
+          if (v) this.guesses.push({angle : teta, speed: v})
+        }
+      }
     }
   }
 }
