@@ -121,6 +121,7 @@ const updateGame = () => {
     const loser = myBoard.players.find(player => player !== winner)
     
     const gameoverParams = new URLSearchParams()
+    gameoverParams.append('pltp', gameType)
     gameoverParams.append('w', winner?.name)
     gameoverParams.append('l', loser?.name)
     gameoverParams.append('diff', winner?.score / (winner?.score + loser?.score))
