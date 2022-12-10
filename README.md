@@ -12,11 +12,11 @@ I've taken the liberty to enhance a few things about the old game.
 - Firstly the gravity input was taken out for simplicity sake as it was deamed as unnecessary.
 - The graphics have also changed to give it a more modern look.
 - The input was changed from a simple text input to a mouse capture with a mouse click release.
+- A computer player was added so it can be played as a single player game.
 
 ### Future additions
 
 There are some aspects that I still want to go through and enhance in the game.
-- Add a computer player so it can be played as a one player game.
 - Add Sounds and music!
 - adapt the game to be playable on mobile
 - add a online playable option
