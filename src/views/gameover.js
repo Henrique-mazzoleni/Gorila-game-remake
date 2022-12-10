@@ -4,7 +4,7 @@ let currParams = new URLSearchParams(currUrl.search)
 const resultMessage = document.querySelector('#result')
 
 let conclusion;
-if (currParams.get('pltp') === 'two-players'){
+if (currParams.get('pltp') == 'two-players'){
     if (currParams.get('diff') > 0.5) conclusion = 'That was a close battle!'
     if (currParams.get('diff') > 0.65) conclusion = 'Dominate performance!'
     if (currParams.get('diff') > 0.8) conclusion = 'What a blow out!'
