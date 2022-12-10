@@ -48,6 +48,14 @@ h1 {
   margin: 100px 0;
 }
 
+section.set-up h2 {
+  margin-bottom: 20px;
+}
+
+section.set-up button {
+  margin-right: 15px;
+}
+
 form {
   display: flex;
   flex-direction: column;
