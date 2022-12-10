@@ -5,6 +5,8 @@ const gameoverURL = new URL(window.location.href)
 if (window.location.hostname === 'localhost') gameoverURL.pathname = '/gameover.html'
 else gameoverURL.pathname = '/Gorila-game-remake/gameover.html'
 
+const gameType = params.get('pltp')
+
 const myBoard = new Board(1, +params.get('r'));
 const content = document.querySelector('#content')
 
@@ -44,11 +46,14 @@ const setWindow = () => {
   myBoard.drawDamage();
 };
 
-
 const start = () => {
   myBoard.start();
   myBoard.createBuildings();
-  myBoard.createPlayers(params.get('pl1'), params.get('pl2'));
+  if (gameType === 'single-player') {
+    myBoard.createPlayers('cpu', params.get('pl1'), 'Computer')
+  } else {
+    myBoard.createPlayers('Human', params.get('pl1'), params.get('pl2'));
+  }
 };
 
 const updateGame = () => {

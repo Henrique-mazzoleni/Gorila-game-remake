@@ -56,13 +56,14 @@ class Board {
     });
   }
 
-  createPlayers(playerOneName, playerTwoName) {
+  createPlayers(playerTwoType, playerOneName, playerTwoName) {
     const playerOne = new Player(Math.round(Math.random()) + 1, this, playerOneName)
     this.loadImg(playerOne, './imgs/don-sit.svg', 'sit')
     this.loadImg(playerOne, './imgs/don-throw.svg', 'throw')
     this.loadImg(playerOne, './imgs/don-celebrate.svg', 'celeb0')
     this.loadImg(playerOne, './imgs/don-celebrate-2.svg', 'celeb1')
     this.loadImg(playerOne, './imgs/dead.png', 'dead')
+    playerOne.type = 'Human'
     this.players.push(playerOne);
     
     const playerTwo = new Player(Board.numberOfBuildings - Math.round(Math.random()) - 2, this, playerTwoName)
@@ -71,6 +72,8 @@ class Board {
     this.loadImg(playerTwo, './imgs/don-celebrate.svg', 'celeb0')
     this.loadImg(playerTwo, './imgs/don-celebrate-2.svg', 'celeb1')
     this.loadImg(playerTwo, './imgs/dead.png', 'dead')
+    if (playerTwoType === 'cpu') playerTwo.type = 'cpu'
+    else playerOne.type = 'Human'
     this.players.push(playerTwo);
   }
 

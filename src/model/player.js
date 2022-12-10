@@ -15,8 +15,6 @@ class Player {
     this.celebrate = 0;
     this.currImage = null;
     this.explosion = null;
-    if (this.name === 'computer') this.type = 'cpu'
-    else this.type = 'Human'
     this.guesses = []
   }
 
@@ -68,7 +66,7 @@ class Player {
     this.ctx.lineWidth = 3;
     this.ctx.strokeStyle = 'red';
     this.ctx.moveTo(Math.floor(this.x + this.width/2), Math.floor(this.y));
-    if (this.name === 'computer') {
+    if (this.type === 'cpu') {
       const endX = this.x + this.width/2 - this.speed * 8 * Math.cos(this.angle*Math.PI/180)
       const endY = this.y - this.speed * 8 * Math.sin(this.angle*Math.PI/180)
       this.ctx.lineTo(Math.floor(endX), Math.floor(endY));
@@ -128,7 +126,7 @@ class Player {
         building = this.board.myBuildings[i]
         y0 = building.y + this.width - this.y
         d = this.x + this.width/2 - building.x - building.width/2
-        for (let teta=50; teta<=80; teta+=10) {
+        for (let teta=50; teta<=75; teta+=10) {
           const numerator = d * g
           const tetaRad = teta * Math.PI /180
           const cosTeta = Math.cos(tetaRad)
