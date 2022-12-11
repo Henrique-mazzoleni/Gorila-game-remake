@@ -1,3 +1,8 @@
+const song = new Audio('/sounds/Welcome_Song.mp3')
+const songPlay = setInterval(()=> {
+  song.play();
+},9000)
+
 const url = new URL(document.location.origin);
 
 if (document.location.hostname === "localhost") url.pathname = "/game.html";
@@ -73,7 +78,8 @@ singlePlayerButton.addEventListener("click", () => {
     params.append("pl1", playerName.value);
     params.append("r", rounds.value);
     url.search = params;
-
+    
+    clearInterval(songPlay)
     document.location.href = url;
   })
 });
@@ -97,7 +103,8 @@ twoPlayerButton.addEventListener("click", () => {
     params.append("pl2", playerTwoName.value);
     params.append("r", rounds.value);
     url.search = params;
-  
+    
+    clearInterval(songPlay)
     document.location.href = url;
   });
 });

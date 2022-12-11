@@ -26,12 +26,14 @@ class Banana {
   }
 
   throw() {
+    audioObj.throw.play()
     const player = this.board.players[this.board.turn];
     const angleRadians = (player.angle * Math.PI) / 180;
     this.speedY = player.speed * Math.sin(angleRadians);
     if (this.board.turn === 0) this.speedX = player.speed * Math.cos(angleRadians);
     if (this.board.turn === 1) this.speedX = -player.speed * Math.cos(angleRadians);
     this.board.turn = this.board.turn ? 0 : 1;
+    this.flyingAudioInteval = setInterval(()=>audioObj.swish.play(), 10)
   }
 
   move() {
@@ -51,6 +53,8 @@ class Banana {
         if (distance < this.board.hitSize) return false
       }
       if (!obstacle.name) this.board.hitList.push({x: this.x, y: this.y})
+      clearInterval(this.flyingAudioInteval)
+      audioObj.explode.play()
       return true;
     }
     return false;

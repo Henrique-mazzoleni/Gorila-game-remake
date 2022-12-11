@@ -10,6 +10,13 @@ const gameType = params.get('pltp')
 const myBoard = new Board(1, +params.get('r'));
 const content = document.querySelector('#content')
 
+const audioObj = {
+  throw: new Audio('/sounds/Throw.ogg'),
+  explode: new Audio('/sounds/explode.wav'),
+  celebrate: new Audio('/sounds/monkey.wav'),
+  swish: new Audio('/sounds/swish.wav'),
+}
+
 const display = () => {
   for (const player of myBoard.players) {
     myBoard.ctx.fillStyle = "black";
@@ -82,6 +89,7 @@ const updateGame = () => {
       // goes through players and checks for hits and then checks if the explosion radius hits player
       for (const player of myBoard.players) {
         if (myBoard.banana?.checkHit(player)) {
+          audioObj.celebrate.play()
           player.death();
           myBoard.players[player.id ? 0 : 1].score++;
           myBoard.banana = null;
@@ -99,7 +107,10 @@ const updateGame = () => {
       }
   
       // checks if banana is out of bounds on x
-      if (myBoard.banana?.checkOutOfBounds()) myBoard.banana = null;
+      if (myBoard.banana?.checkOutOfBounds()) {
+        clearInterval(myBoard.banana.flyingAudioInteval)
+        myBoard.banana = null;
+      }
     } else { // if banana is not moving
       // draw the refrence lines
       myBoard.players[myBoard.turn].drawRefrenceLine();
@@ -132,5 +143,4 @@ const updateGame = () => {
       window.location.href = gameoverURL
     }, 1000)
   }
-  
 };

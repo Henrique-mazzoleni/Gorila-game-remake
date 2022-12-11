@@ -5,6 +5,8 @@ window.addEventListener('mousemove', (event) => {
 })
 
 window.addEventListener('click', (event) => {
-  myBoard.players[myBoard.turn].setLastLine(event.clientX, event.clientY)
-  myBoard.banana.throw()
+  if (!myBoard.banana?.speedX && myBoard.players[myBoard.turn].type !== 'cpu') {
+    myBoard.players[myBoard.turn].setLastLine(event.clientX, event.clientY)
+    myBoard.banana.throw()
+  }
 })
