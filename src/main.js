@@ -1,21 +1,22 @@
-const url = new URL(document.location.href)
-const params = new URLSearchParams(url.search)
+const url = new URL(document.location.href);
+const params = new URLSearchParams(url.search);
 
-const gameoverURL = new URL(window.location.href)
-if (window.location.hostname === 'localhost') gameoverURL.pathname = '/gameover.html'
-else gameoverURL.pathname = '/Gorila-game-remake/gameover.html'
+const gameoverURL = new URL(window.location.href);
+if (window.location.hostname === "localhost")
+  gameoverURL.pathname = "/gameover.html";
+else gameoverURL.pathname = "/Gorila-game-remake/gameover.html";
 
-const gameType = params.get('pltp')
+const gameType = params.get("pltp");
 
-const myBoard = new Board(1, +params.get('r'));
-const content = document.querySelector('#content')
+const myBoard = new Board(1, +params.get("r"));
+const content = document.querySelector("#content");
 
 const audioObj = {
-  throw: new Audio('/sounds/Throw.ogg'),
-  explode: new Audio('/sounds/explode.wav'),
-  celebrate: new Audio('/sounds/monkey.wav'),
-  swish: new Audio('/sounds/swish.wav'),
-}
+  throw: new Audio("/sounds/Throw.ogg"),
+  explode: new Audio("/sounds/explode.wav"),
+  celebrate: new Audio("/sounds/monkey.wav"),
+  swish: new Audio("/sounds/swish.wav"),
+};
 
 const display = () => {
   for (const player of myBoard.players) {
@@ -56,10 +57,10 @@ const setWindow = () => {
 const start = () => {
   myBoard.start();
   myBoard.createBuildings();
-  if (gameType === 'single-player') {
-    myBoard.createPlayers('cpu', params.get('pl1'), 'Computer')
+  if (gameType === "single-player") {
+    myBoard.createPlayers("cpu", params.get("pl1"), "Computer");
   } else {
-    myBoard.createPlayers('Human', params.get('pl1'), params.get('pl2'));
+    myBoard.createPlayers("Human", params.get("pl1"), params.get("pl2"));
   }
 };
 
@@ -71,10 +72,10 @@ const updateGame = () => {
     // create new banana and put banana on the player who's turn it is
     if (!myBoard.banana) myBoard.newBanana();
     myBoard.banana.setBanana();
-    
+
     // if banana is moving
     if (myBoard.banana.speedX || myBoard.banana.speedY) {
-      // draw banana animation 
+      // draw banana animation
       myBoard.banana.draw();
       myBoard.banana.move();
 
@@ -85,62 +86,76 @@ const updateGame = () => {
           break;
         }
       }
-      
+
       // goes through players and checks for hits and then checks if the explosion radius hits player
       for (const player of myBoard.players) {
         if (myBoard.banana?.checkHit(player)) {
-          audioObj.celebrate.play()
+          audioObj.celebrate.play();
           player.death();
           myBoard.players[player.id ? 0 : 1].score++;
           myBoard.banana = null;
         }
-  
+
         for (const hit of myBoard.hitList) {
-          const distance = ((hit.x - player.x)**2 + (hit.y - player.y)**2)**0.5
-          if (distance < (myBoard.hitSize + player.width)*0.7) {
+          const distance =
+            ((hit.x - player.x) ** 2 + (hit.y - player.y) ** 2) ** 0.5;
+          if (distance < (myBoard.hitSize + player.width) * 0.7) {
             player.death();
-            myBoard.hitList = myBoard.hitList.filter(buildingHit => buildingHit !== hit)
+            myBoard.hitList = myBoard.hitList.filter(
+              (buildingHit) => buildingHit !== hit
+            );
             myBoard.players[player.id ? 0 : 1].score++;
             myBoard.banana = null;
           }
         }
       }
-  
+
       // checks if banana is out of bounds on x
       if (myBoard.banana?.checkOutOfBounds()) {
-        clearInterval(myBoard.banana.flyingAudioInteval)
+        clearInterval(myBoard.banana.flyingAudioInteval);
         myBoard.banana = null;
       }
-    } else { // if banana is not moving
+    } else {
+      // if banana is not moving
       // draw the refrence lines
       myBoard.players[myBoard.turn].drawRefrenceLine();
       myBoard.players[myBoard.turn].drawLastLine();
 
       // if player is cpu throw automatically
-      if (myBoard.players[myBoard.turn].type === 'cpu') myBoard.players[myBoard.turn].cpuPlay();
+      if (myBoard.players[myBoard.turn].type === "cpu")
+        myBoard.players[myBoard.turn].cpuPlay();
       // else capture mouse and calculate angle and speed
       else myBoard.players[myBoard.turn].setAngleAndSpeed();
 
       // check if on of the players was hit and play end round animation
-      myBoard.players.forEach((player) => {if (!player.alive) myBoard.endRoundAnimation()})
     }
-  }
-
-  // check for end game and redirect to end game screen
-  if (myBoard.checkEndGame()) {
-    const winner = myBoard.players.find(player => player.score == params.get('r'))
-    const loser = myBoard.players.find(player => player !== winner)
-    
-    const gameoverParams = new URLSearchParams()
-    gameoverParams.append('pltp', gameType)
-    gameoverParams.append('w', winner?.name)
-    gameoverParams.append('l', loser?.name)
-    gameoverParams.append('diff', winner?.score / (winner?.score + loser?.score))
-
-    gameoverURL.search = gameoverParams
-
-    setTimeout(() => {
-      window.location.href = gameoverURL
-    }, 1000)
+  } else {
+    // if round is over
+    // display end-round scene
+    myBoard.players.forEach((player) => {
+      if (!player.alive) myBoard.endRoundAnimation();
+    });
+    // check for end game and redirect to end game screen
+    if (myBoard.checkEndGame()) {
+      const winner = myBoard.players.find(
+        (player) => player.score == params.get("r")
+      );
+      const loser = myBoard.players.find((player) => player !== winner);
+  
+      const gameoverParams = new URLSearchParams();
+      gameoverParams.append("pltp", gameType);
+      gameoverParams.append("w", winner?.name);
+      gameoverParams.append("l", loser?.name);
+      gameoverParams.append(
+        "diff",
+        winner?.score / (winner?.score + loser?.score)
+      );
+  
+      gameoverURL.search = gameoverParams;
+  
+      setTimeout(() => {
+        window.location.href = gameoverURL;
+      }, 1000);
+    }
   }
 };
