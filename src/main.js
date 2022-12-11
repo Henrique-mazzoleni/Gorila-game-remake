@@ -1,10 +1,11 @@
 const url = new URL(document.location.href);
 const params = new URLSearchParams(url.search);
 
+let deploy = '';
+if (!window.location.hostname === "localhost") deploy = "/Gorila-game-remake";
+
 const gameoverURL = new URL(window.location.href);
-if (window.location.hostname === "localhost")
-  gameoverURL.pathname = "/gameover.html";
-else gameoverURL.pathname = "/Gorila-game-remake/gameover.html";
+gameoverURL.pathname = `${deploy}/gameover.html`;
 
 const gameType = params.get("pltp");
 
@@ -12,10 +13,10 @@ const myBoard = new Board(1, +params.get("r"));
 const content = document.querySelector("#content");
 
 const audioObj = {
-  throw: new Audio("/sounds/Throw.ogg"),
-  explode: new Audio("/sounds/explode.wav"),
-  celebrate: new Audio("/sounds/monkey.wav"),
-  swish: new Audio("/sounds/swish.wav"),
+  throw: new Audio(`${deploy}/sounds/Throw.ogg`),
+  explode: new Audio(`${deploy}/sounds/explode.wav`),
+  celebrate: new Audio(`${deploy}/sounds/monkey.wav`),
+  swish: new Audio(`${deploy}/sounds/swish.wav`),
 };
 
 const display = () => {

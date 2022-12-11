@@ -17,7 +17,6 @@ I've taken the liberty to enhance a few things about the old game.
 ### Future additions
 
 There are some aspects that I still want to go through and enhance in the game.
-- Add Sounds and music!
 - adapt the game to be playable on mobile
 - add a online playable option
 

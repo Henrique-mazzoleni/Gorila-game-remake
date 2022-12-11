@@ -1,14 +1,17 @@
-const song = new Audio('/sounds/Welcome_Song.mp3')
-const songPlay = setInterval(()=> {
-  song.play();
-},9000)
 
 const url = new URL(document.location.origin);
 
-if (document.location.hostname === "localhost") url.pathname = "/game.html";
-else url.pathname = "/Gorila-game-remake/game.html";
+let deploy = '';
 
+if (!document.location.hostname === "localhost") deploy = "/Gorila-game-remake";
+
+url.pathname = `${deploy}/game.html`;
 const params = new URLSearchParams(url.search);
+
+const song = new Audio(`${deploy}/sounds/Welcome_Song.mp3`)
+const songPlay = setInterval(()=> {
+  song.play();
+},9000)
 
 const setupSection = document.querySelector("Section.set-up");
 const singlePlayerButton = document.querySelector("#single-player");
