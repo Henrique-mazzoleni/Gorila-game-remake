@@ -3,7 +3,7 @@ const url = new URL(document.location.origin);
 
 let deploy = '';
 
-if (!document.location.hostname === "localhost") deploy = "/Gorila-game-remake";
+if (document.location.hostname !== "localhost") deploy = "/Gorila-game-remake";
 
 url.pathname = `${deploy}/game.html`;
 const params = new URLSearchParams(url.search);

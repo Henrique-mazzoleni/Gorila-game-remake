@@ -4,7 +4,7 @@ let currParams = new URLSearchParams(currUrl.search)
 const resultMessage = document.querySelector('#result')
 
 let deploy = '';
-if (!document.location.hostname === 'localhost') deploy = '/Gorila-game-remake'
+if (document.location.hostname !== 'localhost') deploy = '/Gorila-game-remake'
 
 const audioObj = {
     twoPlayer: new Audio(`${deploy}/sounds/End_twoPlayer.wav`),
