@@ -44,5 +44,6 @@ if (currParams.get('pltp') == 'two-players'){
 document.querySelector('#restart').addEventListener('click', () => {
     const url = new URL(document.location.href)
     url.pathname = `${deploy}/`
+    url.search = ''
     document.location.href = url
 })
