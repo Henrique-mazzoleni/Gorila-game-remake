@@ -1,0 +1,25 @@
+{
+  "name": "gorila-game-remake",
+  "version": "1.0.0",
+  "description": "The here recreated game is an old DOS game where two gorillas battle for dominance in a city landscape. Each gorilla is equiped with exploding bananas and take turn throughing them ate each other.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Henrique-mazzoleni/Gorila-game-remake.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Henrique-mazzoleni/Gorila-game-remake/issues"
+  },
+  "homepage": "https://github.com/Henrique-mazzoleni/Gorila-game-remake#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "hbs": "^4.2.0",
+    "socket.io": "^4.5.4"
+  }
+}
