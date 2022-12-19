@@ -7,7 +7,7 @@ if (window.location.hostname !== "localhost") deploy = "/Gorila-game-remake";
 const gameoverURL = new URL(window.location.href);
 gameoverURL.pathname = `${deploy}/gameover`;
 
-const gameType = params.get("pltp");
+const gameType = params.get("pl2") ? "two-players" : "single-player"
 
 const myBoard = new Board(1, +params.get("r"));
 const content = document.querySelector("#content");
