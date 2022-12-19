@@ -19,7 +19,7 @@ app.get("/game", (req, res) => {
 })
 
 app.get("/gameover", (req,res) => {
-    res.render('gameover', {tiltle: "gameover"})
+    res.render('gameover', {title: "gameover"})
 })
 
 app.listen(3000, () => console.log('running on port 3000'))
