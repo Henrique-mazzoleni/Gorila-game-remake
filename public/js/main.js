@@ -5,7 +5,7 @@ let deploy = '';
 if (window.location.hostname !== "localhost") deploy = "/Gorila-game-remake";
 
 const gameoverURL = new URL(window.location.href);
-gameoverURL.pathname = `${deploy}/gameover.html`;
+gameoverURL.pathname = `${deploy}/gameover`;
 
 const gameType = params.get("pltp");
 

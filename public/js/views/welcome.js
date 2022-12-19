@@ -4,7 +4,7 @@ let deploy = '';
 
 if (document.location.hostname !== "localhost") deploy = "/Gorila-game-remake";
 
-url.pathname = `${deploy}/game.html`;
+url.pathname = `${deploy}/game`;
 const params = new URLSearchParams(url.search);
 
 const song = new Audio(`${deploy}/sounds/Welcome_Song.mp3`)

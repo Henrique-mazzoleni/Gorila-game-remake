@@ -43,7 +43,7 @@ class Board {
     for (let i = 0; i < Board.numberOfBuildings; i++) {
       const building = new Building(this)
       const imgIdx = Math.ceil(Math.random()*6)
-      this.loadImg(building, `./imgs/Building0${imgIdx}.svg`)
+      this.loadImg(building, `/img/Building0${imgIdx}.svg`)
       myBoard.myBuildings.push(building);
     }
   }
@@ -58,20 +58,20 @@ class Board {
 
   createPlayers(playerTwoType, playerOneName, playerTwoName) {
     const playerOne = new Player(Math.round(Math.random()) + 1, this, playerOneName)
-    this.loadImg(playerOne, './imgs/don-sit.svg', 'sit')
-    this.loadImg(playerOne, './imgs/don-throw.svg', 'throw')
-    this.loadImg(playerOne, './imgs/don-celebrate.svg', 'celeb0')
-    this.loadImg(playerOne, './imgs/don-celebrate-2.svg', 'celeb1')
-    this.loadImg(playerOne, './imgs/dead.png', 'dead')
+    this.loadImg(playerOne, '/img/don-sit.svg', 'sit')
+    this.loadImg(playerOne, '/img/don-throw.svg', 'throw')
+    this.loadImg(playerOne, '/img/don-celebrate.svg', 'celeb0')
+    this.loadImg(playerOne, '/img/don-celebrate-2.svg', 'celeb1')
+    this.loadImg(playerOne, '/img/dead.png', 'dead')
     playerOne.type = 'Human'
     this.players.push(playerOne);
     
     const playerTwo = new Player(Board.numberOfBuildings - Math.round(Math.random()) - 2, this, playerTwoName)
-    this.loadImg(playerTwo, './imgs/don-sit-2.svg', 'sit')
-    this.loadImg(playerTwo, './imgs/don-throw-2.svg', 'throw')
-    this.loadImg(playerTwo, './imgs/don-celebrate.svg', 'celeb0')
-    this.loadImg(playerTwo, './imgs/don-celebrate-2.svg', 'celeb1')
-    this.loadImg(playerTwo, './imgs/dead.png', 'dead')
+    this.loadImg(playerTwo, '/img/don-sit-2.svg', 'sit')
+    this.loadImg(playerTwo, '/img/don-throw-2.svg', 'throw')
+    this.loadImg(playerTwo, '/img/don-celebrate.svg', 'celeb0')
+    this.loadImg(playerTwo, '/img/don-celebrate-2.svg', 'celeb1')
+    this.loadImg(playerTwo, '/img/dead.png', 'dead')
     if (playerTwoType === 'cpu') playerTwo.type = 'cpu'
     else playerOne.type = 'Human'
     this.players.push(playerTwo);
@@ -86,7 +86,7 @@ class Board {
 
   newBanana() {
     this.banana = new Banana(this)
-    this.loadImg(this.banana, './imgs/banana.svg')
+    this.loadImg(this.banana, '/img/banana.svg')
   }
 
   drawDamage() {
