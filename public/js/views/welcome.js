@@ -1,7 +1,7 @@
 const url = new URL(document.location.origin);
 
 let deploy = '';
-if (document.location.hostname !== "localhost") deploy = "/Gorila-game-remake";
+// if (document.location.hostname !== "localhost") deploy = "/Gorila-game-remake";
 
 const song = new Audio(`${deploy}/sounds/Welcome_Song.mp3`)
 const songPlay = setInterval(()=> {

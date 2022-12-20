@@ -4,7 +4,7 @@ let currParams = new URLSearchParams(currUrl.search)
 const resultMessage = document.querySelector('#result')
 
 let deploy = '';
-if (document.location.hostname !== 'localhost') deploy = '/Gorila-game-remake'
+// if (document.location.hostname !== 'localhost') deploy = '/Gorila-game-remake'
 
 const audioObj = {
     twoPlayer: new Audio(`${deploy}/sounds/End_twoPlayer.wav`),
@@ -40,10 +40,3 @@ if (currParams.get('pltp') == 'two-players'){
         `
     }
 }
-
-document.querySelector('#restart').addEventListener('click', () => {
-    const url = new URL(document.location.href)
-    url.pathname = `${deploy}/`
-    url.search = ''
-    document.location.href = url
-})

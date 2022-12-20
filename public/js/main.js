@@ -2,7 +2,7 @@ const url = new URL(document.location.href);
 const params = new URLSearchParams(url.search);
 
 let deploy = '';
-if (window.location.hostname !== "localhost") deploy = "/Gorila-game-remake";
+// if (window.location.hostname !== "localhost") deploy = "/Gorila-game-remake";
 
 const gameoverURL = new URL(window.location.href);
 gameoverURL.pathname = `${deploy}/gameover`;

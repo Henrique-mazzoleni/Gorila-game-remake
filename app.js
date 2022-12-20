@@ -1,6 +1,7 @@
 const express = require("express");
-const path = require("path")
+const path = require("path");
 const hbs = require("hbs");
+require('dotenv').config();
 
 const app = express();
 
@@ -22,4 +23,4 @@ app.get("/gameover", (req,res) => {
     res.render('gameover', {title: "Gameover"})
 })
 
-app.listen(3000, () => console.log('running on port 3000'))
+app.listen(process.env.PORT, () => console.log(`running on port ${process.env.PORT}`))
