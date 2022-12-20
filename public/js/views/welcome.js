@@ -4,9 +4,30 @@ let deploy = '';
 // if (document.location.hostname !== "localhost") deploy = "/Gorila-game-remake";
 
 const song = new Audio(`${deploy}/sounds/Welcome_Song.mp3`)
-const songPlay = setInterval(()=> {
-  song.play();
-},100)
+
+const soundOff = `
+<i class="fas fa-volume-mute"></i>
+`
+const soundOn = `
+<i class="fas fa-volume-up"></i>
+`
+
+const soundButton = document.querySelector('#volume-toggle')
+
+let songPlay;
+const toggleSound = () => {
+  if (!songPlay) {
+    songPlay = setInterval(()=> {
+      song.play();
+    },100)
+    soundButton.innerHTML = soundOn
+  } else {
+    song.pause()
+    clearInterval(songPlay)
+    songPlay = null;
+    soundButton.innerHTML = soundOff
+  }
+}
 
 const setupSection = document.querySelector("Section.set-up");
 
