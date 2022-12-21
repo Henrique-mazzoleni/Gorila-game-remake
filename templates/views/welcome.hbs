@@ -18,12 +18,13 @@
       <section class="set-up">
         <h2>How Many Players?</h2>
         <div class="player-selection">
-          <button id="single-player" onclick="singlePlayerForm()">Single Player</button>
-          <button id="two-player" onclick="twoPlayerForm()">Two Players</button>
+          <button onclick="singlePlayerForm()">Single Player</button>
+          <button onclick="selectOnline()">Two Players</button>
         </div>
       </section>
       {{>footer}}
     </section>
+    <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/js/views/welcome.js"></script>
   </body>
 </html>

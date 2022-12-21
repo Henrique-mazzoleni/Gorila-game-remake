@@ -4,8 +4,8 @@
   "description": "The here recreated game is an old DOS game where two gorillas battle for dominance in a city landscape. Each gorilla is equiped with exploding bananas and take turn throughing them ate each other.",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon --ext js,hbs,css app.js",
+    "start": "node src/app.js",
+    "dev": "nodemon --ext js,hbs,css src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

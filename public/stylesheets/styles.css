@@ -30,6 +30,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 body {
   position: relative;
   background: url(/img/586.jpg) no-repeat center center/cover;
@@ -66,7 +70,11 @@ h1 {
   margin: 100px 0;
 }
 
-section.set-up h2 {
+section.set-up {
+  max-width: 800px;
+}
+
+section.set-up h2, section.set-up h3 {
   margin-bottom: 20px;
 }
 
@@ -90,7 +98,7 @@ form input {
   border-radius: 7px;
 }
 
-.rounds input {
+.rounds input, #challengeRounds {
   font-family: "Courier New", Courier, monospace;
   font-weight: 500;
 }
@@ -113,6 +121,17 @@ button {
   border: 1px solid #f1c232;
   padding: 5px 30px;
   cursor: pointer;
+}
+
+#gamesSelect {
+  display: flex;
+  flex-direction: column;
+}
+
+#table {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 20px;
 }
 
 footer {
