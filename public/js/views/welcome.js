@@ -1,4 +1,4 @@
-const socket = io();
+// const socket = io();
 
 const song = new Audio(`/sounds/Welcome_Song.mp3`);
 const soundOff = `<i class="fas fa-volume-mute"></i>`;
@@ -26,7 +26,7 @@ const selectHTML = `
   <h2>How Many Players?</h2>
   <div class="player-selection">
     <button onclick="singlePlayerForm()">Single Player</button>
-    <button onclick="selectOnline()">Two Players</button>
+    <button onclick="twoPlayerForm()">Two Players</button>
   </div>
 `;
 
@@ -124,72 +124,76 @@ const selectChallenge = () => {
   setupSection.innerHTML = selectChallengeHTML;
 }
 
-const newChallengeForm = () => {
-  setupSection.innerHTML = newChallengeFormHTML;
-  const form = document.querySelector('form')
-  form.addEventListener('submit', (event) => {
-    event.preventDefault()
-    const playerName = form.querySelector('#name').value
-    const noOfRounds = +form.querySelector('#rounds').value
-    socket.emit('challengeMade', playerName, noOfRounds)
-  })
-}
+// const newChallengeForm = () => {
+//   setupSection.innerHTML = newChallengeFormHTML;
+//   const form = document.querySelector('form')
+//   form.addEventListener('submit', (event) => {
+//     event.preventDefault()
+//     const playerName = form.querySelector('#name').value
+//     const noOfRounds = +form.querySelector('#rounds').value
+//     socket.emit('challengeMade', playerName, noOfRounds)
+//   })
+// }
 
 
-let acceptChallengeFormHTML;
-const acceptChallengeForm = async () => {
-  const fetchData = await fetch('/challenges')
-  const {availableChallenges: challenges} = await fetchData.json()
-  
-  if (challenges.length === 0) {
-    acceptChallengeFormHTML = `
-    <h2>There are no challenges at the moment</h2>
-    <div class='action'>
-      <button onclick="revertForm()">Back</button>
-      <button onclick="newChallengeForm()">New Challenge</button>
-    </div>
-    `
-  } else {
-    acceptChallengeFormHTML = `
-    <section id="gamesSelect">
-    <h2>Pick one of the challenges below</h2>
-    <section id="table">
-    <div class="names">
-      <h3>Challenger Name</h3>
-      <ul>
-    ` 
-    for (const challenge of challenges) acceptChallengeFormHTML += `<li>${challenge[0]}</li>`
-    acceptChallengeFormHTML += `
-      </ul>
-    </div>
-    <div class="rounds">
-      <h3>No of Rounds</h3>
-      <ul id="challengeRounds">
-    `
-    for (const challenge of challenges) acceptChallengeFormHTML += `<li >${challenge[1]}</li>`
-    acceptChallengeFormHTML += `
-      </ul>
-    </div>
-    <div class="action">
-      <h3>take the challenge!</h3>
-      <ul>
-    `
-    for (const challenge of challenges) acceptChallengeFormHTML += `<li><button onclick="acceptChallenge('${challenge[0]}',${challenge[1]})">accept!</button></li>`
-    acceptChallengeFormHTML += `
-      </ul>
-    </div>
-    </section>
-    <div class='action'>
-    <button onclick="revertForm()">Back</button>
-    <button onclick="newChallengeForm()">New Challenge</button>
-  </div>
-    </section>
-    `
-  }
-  setupSection.innerHTML = acceptChallengeFormHTML;
-}
+// let acceptChallengeFormHTML;
 
-const acceptChallenge = (...challenger) => {
-  console.log('accepted')
-  console.log(challenger)
-}
+// let challenges;
+// socket.on('availableChallanges', (availableChallenges) => {
+//   console.log(availableChallenges);
+//   challenges = availableChallenges
+// })
+
+// const acceptChallengeForm = async () => {
+//   if (challenges.length === 0) {
+//     acceptChallengeFormHTML = `
+//     <h2>There are no challenges at the moment</h2>
+//     <div class='action'>
+//       <button onclick="revertForm()">Back</button>
+//       <button onclick="newChallengeForm()">New Challenge</button>
+//     </div>
+//     `
+//   } else {
+//     acceptChallengeFormHTML = `
+//     <section id="gamesSelect">
+//     <h2>Pick one of the challenges below</h2>
+//     <section id="table">
+//     <div class="names">
+//       <h3>Challenger Name</h3>
+//       <ul>
+//     ` 
+//     for (const challenge of challenges) acceptChallengeFormHTML += `<li>${challenge[0]}</li>`
+//     acceptChallengeFormHTML += `
+//       </ul>
+//     </div>
+//     <div class="rounds">
+//       <h3>No of Rounds</h3>
+//       <ul id="challengeRounds">
+//     `
+//     for (const challenge of challenges) acceptChallengeFormHTML += `<li >${challenge[1]}</li>`
+//     acceptChallengeFormHTML += `
+//       </ul>
+//     </div>
+//     <div class="action">
+//       <h3>take the challenge!</h3>
+//       <ul>
+//     `
+//     for (const challenge of challenges) acceptChallengeFormHTML += `<li><button onclick="acceptChallenge('${challenge[0]}',${challenge[1]})">accept!</button></li>`
+//     acceptChallengeFormHTML += `
+//       </ul>
+//     </div>
+//     </section>
+//     <div class='action'>
+//     <button onclick="revertForm()">Back</button>
+//     <button onclick="newChallengeForm()">New Challenge</button>
+//   </div>
+//     </section>
+//     `
+//   }
+//   setupSection.innerHTML = acceptChallengeFormHTML;
+// }
+
+// const acceptChallenge = (...challenger) => {
+//   console.log('accepted')
+//   console.log(challenger)
+// }
